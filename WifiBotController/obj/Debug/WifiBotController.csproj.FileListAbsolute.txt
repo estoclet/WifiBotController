@@ -1,0 +1,7 @@
+E:\TPCDA\DotNet\TP_et_Exercices\WifiBotController\WifiBotController\obj\Debug\WifiBotController.csprojAssemblyReference.cache
+E:\TPCDA\DotNet\TP_et_Exercices\WifiBotController\WifiBotController\obj\Debug\WifiBotController.csproj.CoreCompileInputs.cache
+E:\TPCDA\DotNet\TP_et_Exercices\WifiBotController\WifiBotController\bin\Debug\WifiBotController.exe.config
+E:\TPCDA\DotNet\TP_et_Exercices\WifiBotController\WifiBotController\bin\Debug\WifiBotController.exe
+E:\TPCDA\DotNet\TP_et_Exercices\WifiBotController\WifiBotController\bin\Debug\WifiBotController.pdb
+E:\TPCDA\DotNet\TP_et_Exercices\WifiBotController\WifiBotController\obj\Debug\WifiBotController.exe
+E:\TPCDA\DotNet\TP_et_Exercices\WifiBotController\WifiBotController\obj\Debug\WifiBotController.pdb

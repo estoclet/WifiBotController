@@ -13,18 +13,33 @@ namespace WifiBotController
         private string messages;
 
         public InterfaceR(string x, string y) {
-
+            robyOneKenobi = new Rover("localhost", "1234");
         }
 
-        public void avancer() { }
+        public void Avancer()
+        {
+            robyOneKenobi.setCommande(new Byte[2] { 0x70, 0x70 });
+        }
 
-        public void reculer() { }
+        public void reculer()
+        {
+            robyOneKenobi.setCommande(new Byte[2] { 0x30, 0x30 });
+        }
 
-        public void stopper() { }
+        public void stopper()
+        {
+            robyOneKenobi.setCommande(new Byte[2] { 0x00, 0x00 });
+        }
 
-        public void tournerD() { }
+        public void tournerD()
+        {
+            robyOneKenobi.setCommande(new Byte[2] { 0x00, 0x70 });
+        }
 
-        public void tournerG() { }
+        public void tournerG()
+        {
+            robyOneKenobi.setCommande(new Byte[2] { 0x70, 0x00 });
+        }
 
         public string getMessage() { return "message"; }
 

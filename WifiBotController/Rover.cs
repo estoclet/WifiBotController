@@ -22,13 +22,15 @@ namespace WifiBotController
         private string port;
         private string messInfo;
         private bool connexionOK;
-        NetworkStream Netstream;
+      
+        
 
         public Rover(string host, string port)
         {
-            // Instancier SocketClient
-            TcpClient SocketClient = new TcpClient();
-
+            //instanciation du socket client
+            socketClient = new StreamSocket();
+            //instanciation du hostname necessaire à la connexion
+            serveur = new HostName(host);
             // Initialiser connexionOk à false
             connexionOK = false;
 
@@ -37,18 +39,27 @@ namespace WifiBotController
             this.port = port;
 
             // Initialiser l’attribut commandeAEnvoyer à [0,0]
-            commandeAEnvoyer = [ 0, 0 ];
+            commandeAEnvoyer = new byte[2] { 0, 0 };
         }
 
-        public object SocketClient { get; private set; }
-
-        public void connexion()
+        
+    // async et await permettent de ne pas bloquer l'IHM en lançant la connexion
+    // elle sera ici lancée en tache de fond
+        public async void connexion()
         {
             // Connexion
             try
             {
-                socketClient.ConnectAsync(serveur, port);
-                Netstream = SocketClient.GetStream();
+                await socketClient.ConnectAsync(serveur, port);
+                connexionOK = true;
+                writer = new DataWriter(socketClient.OutputStream);
+                //instanciation et paramètrage du timer
+                minuterie = new DispatcherTimer();
+                minuterie.Tick += Minuterie_Tick;
+                minuterie.Interval = new TimeSpan(0, 0, 0, 0, 200);
+                minuterie.Start();
+
+             
 
             }
             catch (SocketException e)
@@ -57,7 +68,24 @@ namespace WifiBotController
             }
         }
 
-        public void deconnexion() { }
+        private async void Minuterie_Tick(object sender, object e)
+        {
+
+           await writer.StoreAsync();
+
+
+        }
+
+        public void deconnexion() {
+            if(connexionOK==true)
+            {
+                writer.DetachStream();
+                writer.Dispose();
+                socketClient.Dispose();
+            }
+                
+
+        }
 
         public bool getConnexion() { return true; }
 

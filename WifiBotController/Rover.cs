@@ -22,12 +22,12 @@ namespace WifiBotController
         private string port;
         private string messInfo;
         private bool connexionOK;
+        NetworkStream Netstream;
 
         public Rover(string host, string port)
         {
             // Instancier SocketClient
             TcpClient SocketClient = new TcpClient();
-            NetworkStream Netstream;
 
             // Initialiser connexionOk à false
             connexionOK = false;
@@ -40,18 +40,20 @@ namespace WifiBotController
             commandeAEnvoyer = [ 0, 0 ];
         }
 
+        public object SocketClient { get; private set; }
+
         public void connexion()
         {
             // Connexion
             try
             {
-                socketClient.Connect(host, port);
+                socketClient.ConnectAsync(serveur, port);
                 Netstream = SocketClient.GetStream();
 
             }
             catch (SocketException e)
             {
-                string msgErreur = "Erreur à la connexion : " + e;
+                messInfo = "Erreur à la connexion : " + e;
             }
         }
 

@@ -70,8 +70,8 @@ namespace WifiBotController
 
         private async void Minuterie_Tick(object sender, object e)
         {
-
-           await writer.StoreAsync();
+                writer.WriteBytes(commandeAEnvoyer);
+                await writer.StoreAsync();
 
 
         }

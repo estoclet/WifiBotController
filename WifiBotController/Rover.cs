@@ -29,8 +29,10 @@ namespace WifiBotController
         {
             //instanciation du socket client
             socketClient = new StreamSocket();
+
             //instanciation du hostname necessaire à la connexion
             serveur = new HostName(host);
+
             // Initialiser connexionOk à false
             connexionOK = false;
 
@@ -58,10 +60,8 @@ namespace WifiBotController
                 minuterie.Tick += Minuterie_Tick;
                 minuterie.Interval = new TimeSpan(0, 0, 0, 0, 200);
                 minuterie.Start();
-
-             
-
             }
+
             catch (SocketException e)
             {
                 messInfo = "Erreur à la connexion : " + e;
@@ -72,8 +72,6 @@ namespace WifiBotController
         {
                 writer.WriteBytes(commandeAEnvoyer);
                 await writer.StoreAsync();
-
-
         }
 
         public void deconnexion() {
@@ -82,15 +80,13 @@ namespace WifiBotController
                 writer.DetachStream();
                 writer.Dispose();
                 socketClient.Dispose();
+                // on oublie pas d'arrêter le timer :
+                minuterie.Stop();
             }
-                
-
         }
 
-        public bool getConnexion() { return true; }
+        public bool getConnexion() { return connexionOK; }
 
-        public void setCommande(Byte[] commande) { }
-
-        private void minuterie_Tick(object sender, EventArgs e) { }
+        public void setCommande(Byte[] commande) { commandeAEnvoyer = commande; }
     }
 }

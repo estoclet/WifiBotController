@@ -12,7 +12,9 @@ namespace WifiBotController
         private bool etatConnexion;
         private string messages;
 
-        public InterfaceR(string x, string y) { }
+        public InterfaceR(string x, string y) {
+
+        }
 
         public void avancer() { }
 

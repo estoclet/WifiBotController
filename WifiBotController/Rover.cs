@@ -82,6 +82,7 @@ namespace WifiBotController
                 socketClient.Dispose();
                 // on oublie pas d'arrêter le timer :
                 minuterie.Stop();
+                connexionOK = false;
             }
         }
 
